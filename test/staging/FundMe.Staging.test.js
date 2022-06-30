@@ -16,7 +16,8 @@ developmentChains.includes(network.name)
         console.log(
           (await fundMe.provider.getBalance(fundMe.address)).toString()
         );
-        await fundMe.fund({ value: sendValue });
+        const funded = await fundMe.fund({ value: sendValue });
+        await funded.wait(1);
         await fundMe.withdraw();
         const endingBalance = await fundMe.provider.getBalance(fundMe.address);
         console.log(endingBalance);
